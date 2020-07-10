@@ -1,17 +1,13 @@
 package businesslogic;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.regex.Pattern;
 
+import dao.DonorDAO;
+
 public class SignUpController {
-	// DonorDAO donordao = new DonorDAO();
-	/******************* Storing last donor id ****************/
-
-//	DonorDAO donordao = new DonorDAO();
-//	String c = donordao.lastdonorid();
-
-	// static Integer index = 1000;
 
 	/*************************** Name Validation ************************/
 
@@ -46,15 +42,29 @@ public class SignUpController {
 		}
 	}
 
-	/************************ Generating an ID *****************************/
+	/********************** Generating an ID ************************/
 
-//	public String ID(String name) {
-//
-//		String newname = name.substring(0, 2).toUpperCase();
-//		String newid = newname + index;
-//		index++;
-//		return newid;
-//	}
+	public String ID(String name) throws ClassNotFoundException, SQLException {
+
+		int index = 0;
+
+		/// Getting last donor id
+		DonorDAO donordao = new DonorDAO();
+		String c = donordao.lastdonorid();
+
+		// If no donor is available in database current donor id starts from 1000
+		if (c == "")
+			index = 1000;
+
+		else {
+			System.out.println("done");
+			index = Integer.parseInt(c.substring(2, 6));
+			index++;
+		}
+		String newname = name.substring(0, 2).toUpperCase();
+		String newid = newname + index;
+		return newid;
+	}
 
 	/*************************** Blood Group Validation ************************/
 	public Boolean bloodgroup(String type) {

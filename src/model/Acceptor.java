@@ -1,22 +1,23 @@
 package model;
 
 public class Acceptor {
-//	public Acceptor(String acceptorID, String aFirstName, String aLastName, String aCity, String aPassword,
-//			String aBloodGroup, int aage, long aPhoneNumber, long aPincode) {
-//		AcceptorID = acceptorID;
-//		AFirstName = aFirstName;
-//		ALastName = aLastName;
-//		ACity = aCity;
-//		APassword = aPassword;
-//		ABloodGroup = aBloodGroup;
-//		Aage = aage;
-//		APhoneNumber = aPhoneNumber;
-//		APincode = aPincode;
-//	}
+	public Acceptor() {
 
-	private String AcceptorID, AFirstName, ALastName, ACity, APhoneNumber, APassword, ABloodGroup;
+	}
+
+	public Acceptor(String acceptorID, String aFirstName, String aLastName, int aage, String aBloodGroup,
+			String aPhoneNumber, String aCity) {
+		AcceptorID = acceptorID;
+		AFirstName = aFirstName;
+		ALastName = aLastName;
+		Aage = aage;
+		ABloodGroup = aBloodGroup;
+		APhoneNumber = aPhoneNumber;
+		ACity = aCity;
+	}
+
+	private String AcceptorID, AFirstName, ALastName, ABloodGroup, APhoneNumber, ACity, APassword;
 	private int Aage;
-	private long APincode;
 
 	public String getAcceptorID() {
 		return AcceptorID;
@@ -82,11 +83,4 @@ public class Acceptor {
 		APhoneNumber = aPhoneNumber;
 	}
 
-	public long getAPincode() {
-		return APincode;
-	}
-
-	public void setAPincode(long aPincode) {
-		APincode = aPincode;
-	}
 }

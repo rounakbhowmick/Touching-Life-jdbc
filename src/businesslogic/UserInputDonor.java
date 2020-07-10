@@ -1,7 +1,6 @@
 package businesslogic;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 
 import dao.DonorDAO;
@@ -10,7 +9,7 @@ import model.Donor;
 public class UserInputDonor {
 	SignUpController signup = new SignUpController();
 
-	public void input(Donor obj) throws IOException, ClassNotFoundException {
+	public void input(Donor obj) throws Exception {
 		BufferedReader sc = new BufferedReader(new InputStreamReader(System.in));
 		/********************************** Name ***********************************/
 

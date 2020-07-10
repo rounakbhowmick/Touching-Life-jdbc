@@ -13,7 +13,7 @@ import utility.ConnectionManager;
 
 public class DonorDAO {
 //	public DonorDAO() throws Exception {
-//		throw new Exception("a");
+//		// throw new Exception("a");
 //	}
 
 	List<Donor> list = new ArrayList<Donor>();
@@ -107,7 +107,6 @@ public class DonorDAO {
 				boolean rss = pss.execute();
 				return true;
 			}
-
 		}
 		return false;
 	}

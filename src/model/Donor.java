@@ -14,6 +14,15 @@ public class Donor {
 		this.DPhoneNumber = dPhoneNumber;
 	}
 
+	public Donor(String dFirstName, String dLastName, String dBloodGroup, String dPhoneNumber, String dCity) {
+		this.DFirstName = dFirstName;
+		this.DLastName = dLastName;
+		this.DCity = dCity;
+		this.DBloodGroup = dBloodGroup;
+		this.DPhoneNumber = dPhoneNumber;
+		this.DCity = dCity;
+	}
+
 	public Donor() {
 
 	}

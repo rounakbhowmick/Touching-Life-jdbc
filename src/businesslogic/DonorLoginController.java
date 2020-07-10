@@ -36,7 +36,7 @@ public class DonorLoginController extends SignUpController {
 
 		while (true) {
 			System.out.println(
-					"\n1.View your data\n2.Change your Password\n3.Change your Availability status\n4.Change your Phone Number\n5.Change your City\n6.Delete your data\n8.Delete your data\n9.Logout");
+					"\n1.View your data\n2.Change your Password\n3.Change your Availability status\n4.Change your Phone Number\n5.Change your City\n6.Delete your data\n7.Logout\n");
 			int userinput = Integer.parseInt(sc.readLine());
 			switch (userinput) {
 
@@ -44,11 +44,11 @@ public class DonorLoginController extends SignUpController {
 
 			case 1:
 				list = donordao.view(donorid);
-				System.out
-						.println("donorid\tfirstname\tlastname\tage\tweight\tbloodgroup\tphonenumber\tcity\tavailable");
+				System.out.println(
+						"Donorid\tFirstName\tLastName\tAge\tWeight\tBloodgroup\tPhonenumber\tCity\t\tAvailable");
 				for (Donor donor : list) {
 					System.out.println(donor.getDonorID() + "\t" + donor.getDFirstName() + "\t\t" + donor.getDLastName()
-							+ "\t\t" + donor.getDAge() + "\t" + donor.getDWeight() + "\t" + donor.getDBloodGroup()
+							+ "\t" + donor.getDAge() + "\t" + donor.getDWeight() + "\t" + donor.getDBloodGroup()
 							+ "\t\t" + donor.getDPhoneNumber() + "\t" + donor.getDCity() + "\t"
 							+ donor.getDAvailable());
 				}
@@ -125,7 +125,9 @@ public class DonorLoginController extends SignUpController {
 			case 6:
 				donordao.delete(donorid);
 				return;
-
+			case 7:
+				System.out.println("You have been successfully logged out");
+				return;
 			default:
 				System.out.println("Wrong Input");
 			}
