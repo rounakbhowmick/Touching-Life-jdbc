@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.regex.Pattern;
 
+import dao.AcceptorDAO;
 import dao.DonorDAO;
 
 public class SignUpController {
@@ -44,26 +45,36 @@ public class SignUpController {
 
 	/********************** Generating an ID ************************/
 
-	public String ID(String name) throws ClassNotFoundException, SQLException {
+	public String ID(String name, String user) throws ClassNotFoundException, SQLException {
 
 		int index = 0;
-
+		String c = "";
+		DonorDAO donordao;
+		AcceptorDAO acceptordao;
 		/// Getting last donor id
-		DonorDAO donordao = new DonorDAO();
-		String c = donordao.lastdonorid();
+		if (user == "donor") {
+			donordao = new DonorDAO();
+			c = donordao.lastdonorid();
+			if (c == "")
+				index = 1000; // If no donor is available in database current donor id starts from 1000
 
-		// If no donor is available in database current donor id starts from 1000
-		if (c == "")
-			index = 1000;
+			else {
+				index = Integer.parseInt(c);
+				index++;
+			}
+		} else {
+			acceptordao = new AcceptorDAO();
+			c = acceptordao.lastacceptorid();
+			if (c == "")
+				index = 5000;
 
-		else {
-			System.out.println("done");
-			index = Integer.parseInt(c.substring(2, 6));
-			index++;
+			else {
+				index = Integer.parseInt(c);
+				index++;
+			}
 		}
-		String newname = name.substring(0, 2).toUpperCase();
-		String newid = newname + index;
-		return newid;
+
+		return String.valueOf(index);
 	}
 
 	/*************************** Blood Group Validation ************************/

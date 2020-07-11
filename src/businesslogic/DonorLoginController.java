@@ -25,6 +25,7 @@ public class DonorLoginController extends SignUpController {
 		System.out.println("Enter your password");
 		String password = sc.readLine();
 		HashMap<String, Boolean> validate = donordao.login(donorid, password);
+		// System.out.println("Before validate");
 		if (validate.get(donorid)) {
 			System.out.println("Login success" + "\n\n" + "You have successfully logged in.");
 		} else {
@@ -44,14 +45,16 @@ public class DonorLoginController extends SignUpController {
 
 			case 1:
 				list = donordao.view(donorid);
-				System.out.println(
-						"Donorid\tFirstName\tLastName\tAge\tWeight\tBloodgroup\tPhonenumber\tCity\t\tAvailable");
+
+				System.out.format("%-15s%-15s%-15s%-15s%-15s%-15s%-15s%-15s%-15s%n", "DonorID", "FirstName", "LastName",
+						"Age", "Weight", "Bloodgroup", "PhoneNumber", "City", "Available");
+
 				for (Donor donor : list) {
-					System.out.println(donor.getDonorID() + "\t" + donor.getDFirstName() + "\t\t" + donor.getDLastName()
-							+ "\t" + donor.getDAge() + "\t" + donor.getDWeight() + "\t" + donor.getDBloodGroup()
-							+ "\t\t" + donor.getDPhoneNumber() + "\t" + donor.getDCity() + "\t"
-							+ donor.getDAvailable());
+					System.out.format("%-15s%-15s%-15s%-15s%-15s%-15s%-15s%-15s%-15s%n", donor.getDonorID(),
+							donor.getDFirstName(), donor.getDLastName(), donor.getDAge(), donor.getDWeight(),
+							donor.getDBloodGroup(), donor.getDPhoneNumber(), donor.getDCity(), donor.getDAvailable());
 				}
+
 				break;
 			case 2:
 				int count = 0;
@@ -96,7 +99,6 @@ public class DonorLoginController extends SignUpController {
 				while (true) {
 					System.out.println("Enter your new phone number");
 					String phoneNumber = sc.readLine();
-					// donors.get(i).setphonenumber(phoneNumber);
 					Boolean phoneNumbercheck = signup.phoneNumbercheck(phoneNumber);
 					if (phoneNumbercheck) {
 						boolean check = donordao.phonenumber(donorid, phoneNumber);

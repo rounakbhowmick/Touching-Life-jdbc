@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.SQLException;
+import java.util.Base64;
 
 import dao.AcceptorDAO;
 import model.Acceptor;
@@ -82,18 +83,32 @@ public class UserInputAcceptor {
 
 		/************************** ID Generation *********************/
 
-		String id = signup.ID(acceptorobj.getAFirstName());
+		String id = signup.ID(acceptorobj.getAFirstName(), "acceptor");
 		System.out.println();
 		acceptorobj.setAcceptorID(id);
 
 		/************************** Password Generation *********************/
 
 		String newpassword = signup.password();
-		acceptorobj.setAPassword(newpassword);
+		String encrypted = getEncryptedPassword(newpassword);
+		acceptorobj.setAPassword(encrypted);
 
+		/************ Display Login Credentials ******************/
+
+		System.out
+				.println("\n\nSuccessfully Registered.\n\nThank you for registering.\n\n\n\nYOUR LOGIN CREDENTIALS\n\n"
+						+ "USER ID: " + acceptorobj.getAcceptorID() + "\n\n" + "Your default password : " + newpassword
+						+ "\n");
 		/********************* Storing in Acceptor Database ********************/
 
 		AcceptorDAO acceptordao = new AcceptorDAO();
 		acceptordao.signup(acceptorobj);
+	}
+
+	/************* Encrypting Password ************/
+
+	private String getEncryptedPassword(String encrypted) {
+		// TODO Auto-generated method stub
+		return Base64.getEncoder().encodeToString(encrypted.getBytes());
 	}
 }

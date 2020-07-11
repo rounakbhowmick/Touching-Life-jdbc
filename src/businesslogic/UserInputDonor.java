@@ -2,6 +2,7 @@ package businesslogic;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.Base64;
 
 import dao.DonorDAO;
 import model.Donor;
@@ -103,22 +104,29 @@ public class UserInputDonor {
 
 		/************************** ID Generation *********************/
 
-		String id = signup.ID(obj.getDFirstName());
+		String id = signup.ID(obj.getDFirstName(), "donor");
 		obj.setDonorID(id);
 		/************************** Password Generation *********************/
 
 		String newpassword = signup.password();
-		obj.setDPassword(newpassword);
-
+		String encrypted = getEncryptedPassword(newpassword);
+		obj.setDPassword(encrypted);
 		/************ Display Login Credentials ******************/
 
 		System.out.println(
 				"\n\nSuccessfully Registered.\n\nThank you for enrolling to donate blood.\n\n\nYour donations will make a big difference in the lives of many patients.\n\nYOUR LOGIN CREDENTIALS\n\n"
-						+ "USER ID: " + obj.getDonorID() + "\n\n" + "Your default password : " + obj.getDPassword()
-						+ "\n");
+						+ "USER ID: " + obj.getDonorID() + "\n\n" + "Your default password : " + newpassword + "\n");
+
 		/*************************** Storing in Database *************************/
 		DonorDAO donordao = new DonorDAO();
 		donordao.signup(obj);
-
 	}
+
+	/************* Encrypting Password ************/
+
+	private String getEncryptedPassword(String encrypted) {
+		// TODO Auto-generated method stub
+		return Base64.getEncoder().encodeToString(encrypted.getBytes());
+	}
+
 }

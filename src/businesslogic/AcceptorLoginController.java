@@ -35,7 +35,9 @@ public class AcceptorLoginController extends SignUpController {
 					"Unable to Sign In\n" + "\n" + "Please make sure your acceptor id and password are correct.");
 			return;
 		}
+
 		/************************ Acceptor Menu Profile *************************/
+
 		while (true)
 
 		{
@@ -54,16 +56,19 @@ public class AcceptorLoginController extends SignUpController {
 							"\n1.View your data\n2.Change your Password\n3.Change your Phone Number\n4.Change your City\n5.Delete your data\n6.Logout\n");
 					int secondinput = Integer.parseInt(sc.readLine());
 					switch (secondinput) {
+
 					/*********************** Acceptor data in table format *****************/
 
 					case 1:
+						// BJ
 						list = acceptordao.view(acceptorid);
-						System.out.println("AcceptorId\tFirstName\tLastName\tAge\tBloodgroup\tPhonenumber\tCity");
+						System.out.format("%-15s%-15s%-15s%-15s%-15s%-15s%-15s%n", "AcceptorId", "FirstName",
+								"LastName", "Age", "Bloodgroup", "PhoneNumber", "City");
+
 						for (Acceptor acceptor : list) {
-							System.out.println(acceptor.getAcceptorID() + "\t" + acceptor.getAFirstName() + "\t\t"
-									+ acceptor.getALastName() + "\t" + acceptor.getAage() + "\t"
-									+ acceptor.getABloodGroup() + "\t\t" + acceptor.getAPhoneNumber() + "\t"
-									+ acceptor.getACity());
+							System.out.format("%-15s%-15s%-15s%-15s%-15s%-15s%-15s%n", acceptor.getAcceptorID(),
+									acceptor.getAFirstName(), acceptor.getALastName(), acceptor.getAage(),
+									acceptor.getABloodGroup(), acceptor.getAPhoneNumber(), acceptor.getACity());
 						}
 						break;
 
@@ -95,7 +100,6 @@ public class AcceptorLoginController extends SignUpController {
 						while (true) {
 							System.out.println("Enter your new phone number");
 							String phoneNumber = sc.readLine();
-							// acceptors.get(i).setphonenumber(phoneNumber);
 							Boolean phoneNumbercheck = signup.phoneNumbercheck(phoneNumber);
 							if (phoneNumbercheck) {
 								boolean check = acceptordao.phonenumber(acceptorid, phoneNumber);
@@ -165,14 +169,17 @@ public class AcceptorLoginController extends SignUpController {
 				System.out.println("Opps!Currently no available donors are found.Please try again later\n");
 				return;
 			}
-			System.out.println("FirstName\tLastName\tBloodgroup\tPhonenumber\tCity\t");
+			System.out.format("%-15s%-15s%-15s%-15s%-15s%n", "FirstName", "LastName", "Bloodgroup", "Phonenumber",
+					"City");
+
 			for (Donor donor : donorslist) {
-				System.out.println(donor.getDFirstName() + "\t\t" + donor.getDLastName() + "\t" + donor.getDBloodGroup()
-						+ "\t\t" + donor.getDPhoneNumber() + "\t" + donor.getDCity() + "\t");
+				System.out.format("%-15s%-15s%-15s%-15s%-15s%n", donor.getDFirstName(), donor.getDLastName(),
+						donor.getDBloodGroup(), donor.getDPhoneNumber(), donor.getDCity());
 			}
 			donorslist.clear();
 			break;
-		/******** Search By City ***********/
+
+		/************************ Search By City *******************/
 
 		case 2:
 			String searchByCity = "";
@@ -190,12 +197,14 @@ public class AcceptorLoginController extends SignUpController {
 				System.out.println("Opps!Currently no available donors are found.Please try again later\n");
 				return;
 			}
-			System.out.println("FirstName\tLastName\tBloodgroup\tPhonenumber\tCity\t");
+			System.out.format("%-15s%-15s%-15s%-15s%-15s%n", "FirstName", "LastName", "Bloodgroup", "Phonenumber",
+					"City");
 			for (Donor donor : donorslist) {
-				System.out.println(donor.getDFirstName() + "\t\t" + donor.getDLastName() + "\t" + donor.getDBloodGroup()
-						+ "\t\t" + donor.getDPhoneNumber() + "\t" + donor.getDCity() + "\t");
+				System.out.format("%-15s%-15s%-15s%-15s%-15s%n", donor.getDFirstName(), donor.getDLastName(),
+						donor.getDBloodGroup(), donor.getDPhoneNumber(), donor.getDCity());
 			}
-			donorslist.clear();
+
+			donorslist.clear();/// Clearing the array list
 			break;
 		default:
 			System.out.println("Wrong Input");
